@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns="http://www.springframework.org/schema/beans"
+       xmlns:mybatis="http://mybatis.org/schema/mybatis-spring" xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://mybatis.org/schema/mybatis-spring
+        http://mybatis.org/schema/mybatis-spring.xsd
+        http://www.springframework.org/schema/util
+        http://www.springframework.org/schema/util/spring-util.xsd">
+
+    <import resource="dataSource-master.xml" />
+    <import resource="dataSource-slaver.xml" />
+
+    <util:map id="dataSources">
+        <entry key="master" value-ref="master" />
+        <entry key="slaver" value-ref="slaver" />
+    </util:map>
+
+    <bean id="dataSourceLookup" class="org.springframework.jdbc.datasource.lookup.MapDataSourceLookup">
+        <constructor-arg>
+            <ref bean="dataSources"/>
+        </constructor-arg>
+    </bean>
+
+    <bean id="dataSource" class="org.akatsuki.itachi.util.DynamicDataSource">
+        <property name="defaultTargetDataSource" ref="master"/>
+        <property name="targetDataSources" ref="dataSources"/>
+        <property name="dataSourceLookup" ref="dataSourceLookup" />
+    </bean>
+
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="configLocation" value="classpath:mybatis-config.xml"/>
+    </bean>
+
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <mybatis:scan base-package="org.akatsuki.itachi.mapper"/>
+
+</beans>
+
