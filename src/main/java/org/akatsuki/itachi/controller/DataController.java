@@ -1,10 +1,12 @@
 package org.akatsuki.itachi.controller;
 
 import com.alibaba.fastjson.JSON;
-import org.akatsuki.itachi.mapper.CloudSongMapper;
 import org.akatsuki.itachi.meta.CloudSong;
 import org.akatsuki.itachi.service.CloudSongService;
+import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,10 +21,16 @@ import java.util.Map;
  * Created by long.yl on 2016/7/1.
  */
 @Controller
-public class DataController {
+public class DataController implements ApplicationContextAware{
 
+//    @Qualifier("cloudSongServiceBean")
     @Autowired
     CloudSongService cloudSongService;
+
+    @Override
+    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+//        cloudSongService = new CloudSongServiceFactoryBean().getObject();
+    }
 
     @RequestMapping("/song")
     public String index(){

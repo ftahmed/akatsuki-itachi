@@ -40,5 +40,7 @@
 
     <mybatis:scan base-package="org.akatsuki.itachi.mapper"/>
 
+    <!--<bean id="cloudSongServiceBean" class="org.akatsuki.itachi.unfinish.CloudSongServiceFactoryBean" />-->
+
 </beans>
 

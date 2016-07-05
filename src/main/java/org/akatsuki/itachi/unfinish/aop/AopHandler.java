@@ -1,4 +1,4 @@
-package org.akatsuki.itachi.util;
+package org.akatsuki.itachi.unfinish.aop;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;

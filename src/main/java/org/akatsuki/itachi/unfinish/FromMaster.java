@@ -1,4 +1,4 @@
-package org.akatsuki.itachi.util;
+package org.akatsuki.itachi.unfinish;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -10,6 +10,5 @@ import java.lang.annotation.Target;
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.METHOD, ElementType.TYPE})
-public @interface FromSlaver {
-
+public @interface FromMaster {
 }

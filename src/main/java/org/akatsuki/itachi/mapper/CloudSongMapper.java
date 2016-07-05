@@ -1,7 +1,6 @@
 package org.akatsuki.itachi.mapper;
 
 import org.akatsuki.itachi.meta.CloudSong;
-import org.akatsuki.itachi.util.FromSlaver;
 import org.apache.ibatis.annotations.*;
 
 /**
